@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Mis XV Años - Nicole</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Colores */
+            --rose-gold-text: #B76E79;
+            --palo-rosa: #F4E3E3;
+            --blanco: #FFFFFF;
+            --texto-oscuro: #333333;
+            --texto-claro: #555555;
+            --fondo-desktop: #fdfbfb;
+
+            /* Truco de diseño: Texturas de imagen (puedes reemplazar estas URLs por tus imágenes finales) */
+            /* Textura de encaje de purpurina de alta calidad (izquierda y derecha) */
+            --lace-left-texture: url('ruta-a-tu-textura-encaje-izquierdo.png');
+            --lace-right-texture: url('ruta-a-tu-textura-encaje-derecho.png');
+            /* Textura de lazo de satén central */
+            --bow-texture: url('ruta-a-tu-textura-lazo.png');
+            /* Imagen de la joya de corona de diamantes central */
+            --jewel-texture: url('ruta-a-tu-imagen-joya.png');
+            /* Imagen de la corona de purpurina */
+            --crown-texture: url('ruta-a-tu-imagen-corona.png');
+             /* Imagen de filigrana de purpurina para bordes */
+            --filigree-border-texture: url('ruta-a-tu-textura-filigrana-borde.png');
+        }
+
+        /* Reseteo básico y optimización para Safari */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            -webkit-text-size-adjust: 100%;
+            background-color: var(--fondo-desktop);
+            background-image: linear-gradient(120deg, var(--fondo-desktop) 0%, var(--palo-rosa) 100%);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--texto-oscuro);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Contenedor principal para toda la tarjeta (puerta exterior y panel interior) */
+        .invitation-card {
+            width: 100%;
+            max-width: 500px;
+            background: linear-gradient(135deg, var(--blanco) 0%, var(--palo-rosa) 100%);
+            -webkit-box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            -webkit-transform: translateZ(0);
+            display: flex; /* Para organizar los paneles */
+        }
+
+        /* Paneles de la "puerta" de encaje */
+        .lace-fold {
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            background-repeat: no-repeat;
+            background-size: cover;
+            /* Usar imágenes de encaje de purpurina */
+            /* Nota: Si no tienes imágenes reales, puedes simulalas con CSS degradados, pero no será tan detallado */
+        }
+
+        .lace-fold-left {
+            left: 0;
+            background-image: var(--lace-left-texture), linear-gradient(to left, rgba(183, 110, 121, 0.4), rgba(244, 227, 227, 0.2));
+            /* Un poco de sombra para profundidad */
+            -webkit-box-shadow: 5px 0 15px rgba(0,0,0,0.05);
+            box-shadow: 5px 0 15px rgba(0,0,0,0.05);
+        }
+
+        .lace-fold-right {
+            right: 0;
+            background-image: var(--lace-right-texture), linear-gradient(to right, rgba(183, 110, 121, 0.4), rgba(244, 227, 227, 0.2));
+            -webkit-box-shadow: -5px 0 15px rgba(0,0,0,0.05);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.05);
+        }
+
+        /* Lazo de satén central */
+        .bow {
+            width: 90%;
+            max-width: 350px;
+            height: 100px; /* Ajustar según la textura del lazo */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            background-image: var(--bow-texture);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            z-index: 10;
+        }
+
+        /* Joya de corona de diamantes central */
+        .jewel {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%) rotate(0deg);
+            transform: translate(-50%, -50%) rotate(0deg);
+            background-image: var(--jewel-texture);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            z-index: 11;
+            /* Un poco de movimiento suave para interactividad */
+            animation: jewel-shine 3s ease-in-out infinite;
+        }
+
+        @keyframes jewel-shine {
+            0%, 100% { -webkit-transform: translate(-50%, -50%) scale(1); transform: translate(-50%, -50%) scale(1); }
+            50% { -webkit-transform: translate(-50%, -50%) scale(1.05) rotate(5deg); transform: translate(-50%, -50%) scale(1.05) rotate(5deg); }
+        }
+
+        /* Panel interior (el "revelado") */
+        .inner-panel {
+            width: 100%;
+            padding: 10px 15px 40px 15px; /* Dejar espacio para el lazo al principio */
+            text-align: center;
+            /* Filigrana de purpurina en la parte superior e inferior */
+            background-image: var(--filigree-border-texture), var(--filigree-border-texture);
+            background-repeat: no-repeat, no-repeat;
+            background-position: top center, bottom center;
+            background-size: cover, cover;
+            opacity: 0; /* Ocultar inicialmente para el efecto */
+            -webkit-transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Efecto de apertura (se activará con JS o al pasar el ratón para previsualizar) */
+        .invitation-card.open .inner-panel {
+            opacity: 1;
+        }
+
+        .invitation-card.open .lace-fold-left {
+            -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+            -webkit-transition: -webkit-transform 0.5s ease-in-out;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .invitation-card.open .lace-fold-right {
+            -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+            -webkit-transition: -webkit-transform 0.5s ease-in-out;
+            transition: transform 0.5s ease-in-out;
+        }
+        
+        /* Ocultar el lazo al abrir para que no moleste */
+        .invitation-card.open .bow, .invitation-card.open .jewel {
+            opacity: 0;
+            pointer-events: none;
+             -webkit-transition: opacity 0.2s ease-out;
+             transition: opacity 0.2s ease-out;
+        }
+
+        /* SECCIONES DE TEXTO INTERIOR */
+        .section {
+            margin-bottom: 25px;
+        }
+
+        /* Frase inicial */
+        .quote {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.1rem;
+            color: var(--rose-gold-text);
+            line-height: 1.5;
+            margin-bottom: 30px;
+            padding: 0 10px;
+        }
+
+        /* Corona interior de purpurina */
+        .inner-crown {
+            width: 50px;
+            height: 30px;
+            margin: 0 auto 10px auto;
+            background-image: var(--crown-texture);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+
+        /* Títulos principales con efecto purpurina simulado */
+        h1, .name-title {
+            font-family: 'Pinyon Script', cursive;
+            color: var(--rose-gold-text);
+            /* Simular efecto purpurina con degradado y sombra de texto */
+            background: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, var(--rose-gold-text) 50%, rgba(255,255,255,0.7) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
+            text-shadow: 1px 1px 2px rgba(183, 110, 121, 0.4);
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-transform: capitalize;
+            letter-spacing: normal;
+        }
+
+        .name-title {
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .last-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--texto-oscuro);
+            margin-bottom: 25px;
+        }
+
+        /* Padres y Padrinos */
+        .parents-godparents p {
+            font-size: 0.8rem;
+            color: var(--texto-oscuro);
+            margin-bottom: 5px;
+        }
+
+        .parents-godparents strong {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            color: var(--rose-gold-text);
+        }
+
+        /* Logística - Iconos simulan Comida y Baile de la imagen */
+        .event-details {
+            margin-bottom: 20px;
+        }
+
+        .event-icon {
+            font-size: 1.8rem;
+            color: var(--rose-gold-text);
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+
+        /* Botones adaptados con estilo Rose Gold */
+        .btn {
+            display: inline-block;
+            background-color: var(--rose-gold-text);
+            color: var(--blanco);
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 5px;
+            transition: background-color 0.3s ease, -webkit-transform 0.2s ease, transform 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .btn:hover {
+            background-color: #9A5A64;
+            -webkit-transform: translateY(-2px);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            -webkit-transform: translateY(1px);
+            transform: translateY(1px);
+        }
+
+        /* Código de vestimenta */
+        .dress-code-note {
+            font-size: 0.8rem;
+            background-color: rgba(183, 110, 121, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+
+        /* Audio Player adaptado para integrarlo al diseño */
+        .audio-control {
+            display: inline-block;
+            cursor: pointer;
+            margin: 15px 0 25px 0;
+            font-size: 1.5rem;
+            color: var(--rose-gold-text);
+            animation: audio-play-beat 1.5s infinite;
+        }
+
+        @keyframes audio-play-beat {
+            0%, 100% { -webkit-transform: scale(1); transform: scale(1); }
+            50% { -webkit-transform: scale(1.1); transform: scale(1.1); opacity: 0.8; }
+        }
+
+        /* MEDIA QUERIES PARA ADAPTACIÓN A PANTALLAS */
+        
+        /* Ajustes para celulares pequeños (Ej. iPhone SE) */
+        @media (max-width: 380px) {
+            h1 { font-size: 2rem; }
+            .name-title { font-size: 3rem; }
+            .last-name { font-size: 0.85rem; }
+            .btn { padding: 8px 15px; font-size: 0.75rem; }
+            .bow { height: 80px; }
+            .inner-panel { padding: 10px 10px 30px 10px; }
+        }
+
+        /* Ajustes para Computadoras/Tablets grandes */
+        @media (min-width: 768px) {
+            .invitation-card {
+                max-width: 550px;
+            }
+            h1 { font-size: 3rem; }
+            .name-title { font-size: 5rem; }
+            .inner-panel { padding: 10px 20px 50px 20px; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="invitation-card open">
+        
+        <div class="lace-fold lace-fold-left"></div>
+        <div class="lace-fold lace-fold-right"></div>
+        
+        <div class="bow"></div>
+        <div class="jewel"></div>
+
+        <div class="inner-panel">
+            
+            <div class="section">
+                <p class="quote">"Hay momentos en la vida que son irrepetibles, pero compartirlos con las personas que más quieres, estos se vuelven inolvidables."</p>
+            </div>
+
+            <div class="section">
+                <div class="inner-crown"></div>
+                <h1>Mis Quince</h1>
+                <div class="name-title">Nicole</div>
+                <div class="last-name">De La Cruz Sandoval</div>
+            </div>
+
+            <div class="section parents-godparents">
+                <p>Con la bendición de Dios y de mis padres:</p>
+                <strong>Alma Araceli Sandoval Reyes<br>Héctor Miguel Sánchez Vaca</strong>
+                
+                <p>Y el cariño de mis padrinos:</p>
+                <strong>Rebeca Ivonne Sandoval Reyes<br>Mauricio Álvarez Camilo</strong>
+                
+                <p style="margin-top: 20px; font-style: italic; color: var(--rose-gold-text);">¡Te invito a compartir la magia de este día!</p>
+            </div>
+
+            <div class="section">
+                <div class="event-details">
+                    <span class="event-icon">⛪</span> <h3>Ceremonia Religiosa - 5:00 PM</h3>
+                    <p style="font-weight: 600; color: var(--rose-gold-text);">Sábado, 16 de Mayo de 2026</p>
+                    <p>Santuario del Santo Niño de la Salud<br>Av. Acueducto, Lomas de Hidalgo.</p>
+                    <a href="https://maps.app.goo.gl/2s1T3w1A7HBk43u96" target="_blank" rel="noopener noreferrer" class="btn">Ver Mapa</a>
+                </div>
+
+                <div class="event-details" style="margin-top: 30px;">
+                    <span class="event-icon">🏰</span> <h3>Recepción - 7:00 PM</h3>
+                    <p>Eventos Isabel<br>Privada de Mármol #38, Hacienda Los Viñedos, Morelia Mich.</p>
+                    <a href="https://maps.app.goo.gl/UP9Sprmaj57RkCio9?g_st=aw" target="_blank" rel="noopener noreferrer" class="btn">Ver Mapa</a>
+                </div>
+            </div>
+
+            <div class="section">
+                <div style="margin-top: 25px;">
+                    <h3>Código de Vestimenta</h3>
+                    <p>Formal</p>
+                    <div class="dress-code-note">
+                        <em>Nota importante:</em> Los colores rosa, mauve, rose gold y plateado están reservados exclusivamente para la quinceañera.
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px;">
+                    <h3>Mesa de Regalos</h3>
+                    <p>Si deseas tener un detalle conmigo:</p>
+                    <p style="margin: 10px 0;"><strong>Liverpool:</strong> 51974095<br>O si lo prefieres, Regalo Sorpresa.</p>
+                    <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51974095" target="_blank" rel="noopener noreferrer" class="btn" style="background-color: #e10098; box-shadow: 0 4px 8px rgba(225, 0, 152, 0.2);">Ver Mesa en Liverpool</a>
+                </div>
+
+                <div class="audio-control" onclick="toggleAudio()">
+                    🎵 Reproducir Música
+                    <p style="font-size: 0.7rem; color: var(--texto-claro);">(Someone Like You)</p>
+                </div>
+                <audio id="background-audio" loop preload="auto">
+                    <source src="ruta-a-tu-cancion.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+
+            <div class="section" style="margin-top: 30px;">
+                <h2>Confirmación</h2>
+                <p style="margin: 15px 0;">¡Tu presencia es mi mejor regalo!</p>
+                <p>Por favor, confirma tu asistencia antes del<br><strong style="font-size: 1rem; display: inline-block; margin-top: 5px;">01 de mayo de 2026</strong></p>
+                
+                <a href="https://wa.me/524431465149?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20años%20de%20Nicole." target="_blank" rel="noopener noreferrer" class="btn" style="background-color: #25D366; width: 100%; margin-top: 20px; box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);">Confirmar por WhatsApp</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        var audio = document.getElementById('background-audio');
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+                document.querySelector('.audio-control').innerHTML = '⏸ Pausar Música <p style="font-size: 0.7rem; color: var(--texto-claro);">(Someone Like You)</p>';
+            } else {
+                audio.pause();
+                document.querySelector('.audio-control').innerHTML = '🎵 Reproducir Música <p style="font-size: 0.7rem; color: var(--texto-claro);">(Someone Like You)</p>';
+            }
+        }
+    </script>
+
+</body>
+</html>
